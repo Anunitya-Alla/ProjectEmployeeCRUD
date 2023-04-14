@@ -1,5 +1,6 @@
 package com.anunitya.EmployeeProject.rest;
 
+import com.anunitya.EmployeeProject.Service.EmployeeService;
 import com.anunitya.EmployeeProject.dao.EmployeeDAO;
 import com.anunitya.EmployeeProject.entity.Employee;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,17 +13,17 @@ import java.util.List;
 @RequestMapping("/api")
 public class EmployeeRestController {
 
-    private EmployeeDAO employeeDao;
+    private EmployeeService employeeService;
 
     //quick and dirty : Inject employee dao(use constructor injection)
-    public EmployeeRestController(EmployeeDAO theemployeeDao){
-        employeeDao = theemployeeDao;
+    public EmployeeRestController(EmployeeService theemployeeService){
+         employeeService = theemployeeService;
     }
 
     //expose "/employees" and return list of employees
     @GetMapping("/employees")
     public List<Employee> findAll(){
-        return employeeDao.findAll();
+        return employeeService.findAll();
     }
 
 }
